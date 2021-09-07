@@ -1,5 +1,7 @@
 # hello-world
 
+to start fake api, do not forget the command: "json-server --watch db.json"
+
 ## Project setup
 ```
 npm install
