@@ -6,7 +6,7 @@
          v-model="searchValue" 
          placeholder="Search title.."/>
         <label>Search title:</label>
-        <button class="search_btn" @click="search(value)"></button>
+        <button class="search_btn" @click="search(searchValue)"></button>
       </div>
   </div>
 </template>
@@ -31,8 +31,8 @@ export default {
       ...mapActions([
           'GET_SEARCH_VALUE_TO_VUEX'
       ]),
-      search(value) {
-          this.GET_SEARCH_VALUE_TO_VUEX(value);
+      search() {
+          this.GET_SEARCH_VALUE_TO_VUEX(this.searchValue);
       }
   }
 }
@@ -73,6 +73,11 @@ export default {
           color: rgba(0,0,0,.50);
           font-weight: 100;
       }
+
+    .search_btn {
+        width: 100px;
+        height: 20px;
+    }
 
 .v-table-row {
     display: flex;
