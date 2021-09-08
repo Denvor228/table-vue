@@ -11,7 +11,7 @@ const store = new Vuex.Store({
     },
     actions: {
         GET_USERS_FROM_API({commit}) {
-            return axios('http://localhost:3000/posts', {
+            return axios('/db.json', {
                 method: 'GET'
             })
             .then((response) => {

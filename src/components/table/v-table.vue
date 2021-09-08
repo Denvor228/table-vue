@@ -108,12 +108,12 @@ export default {
     sortProductsBySearchValue(searchValue){
       if (searchValue) {
         this.users_data = this.users_data.filter(function(item){
-        return item.name.toLowerCase().includes(searchValue.toLowerCase())
+        return item.code.toLowerCase().includes(searchValue.toLowerCase())
       }) 
       } else {
         return this.users_data;
       }
-    }
+    },
   },
   watch: {
     SEARCH_VALUE() {
