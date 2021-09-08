@@ -6,16 +6,16 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        users: [],
+        currencies: [],
         searchValue: ''
     },
     actions: {
-        GET_USERS_FROM_API({commit}) {
+        GET_CURRENCIES_FROM_API({commit}) {
             return axios('/db.json', {
                 method: 'GET'
             })
             .then((response) => {
-                commit('SET_USERS_TO_VUEX', response.data)
+                commit('SET_CURRENCIES_TO_VUEX', response.data)
             })
         },
         GET_SEARCH_VALUE_TO_VUEX({commit}, value) {
@@ -23,16 +23,16 @@ const store = new Vuex.Store({
         }
     },
     mutations: {
-        SET_USERS_TO_VUEX: (state, users) => {
-            state.users = users
+        SET_CURRENCIES_TO_VUEX: (state, currencies) => {
+            state.currencies = currencies
         },
         SET_SEARCH_VALUE_TO_VUEX: (state, value) => {
             state.searchValue = value;
         }
     },
     getters: {
-        USERS(state) {
-            return state.users;
+        CURRENCIES(state) {
+            return state.currencies;
         },
         SEARCH_VALUE(state) {
             return state.searchValue;

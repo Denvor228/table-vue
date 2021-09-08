@@ -3,16 +3,21 @@
       <div class="search-wrapper">
       <input 
          type="text" 
+         @click="onEnterClick"
+         v-on:keyup.enter="onEnterClick"
          v-model="searchValue" 
          placeholder="Search title.."/>
         <label>Search title:</label>
-        <button class="search_btn" @click="search(searchValue)"></button>
+        <button class="search_btn" @click="onEnterClick" v-on:keyup.enter="onEnterClick"> SEARCH</button>
       </div>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import {mapActions, mapGetters} from 'vuex'
+
+Vue.config.keyCodes.atsign = 50;
 
 export default {
   name: 'v-table-search',
@@ -31,7 +36,7 @@ export default {
       ...mapActions([
           'GET_SEARCH_VALUE_TO_VUEX'
       ]),
-      search() {
+      onEnterClick: function() {
           this.GET_SEARCH_VALUE_TO_VUEX(this.searchValue);
       }
   }
@@ -59,6 +64,7 @@ export default {
       border: 1px solid rgba(0,0,0,.12);
       transition: .15s all ease-in-out;
       background: white;
+      margin-right: 20px;
     }
     input:focus {
         outline: none;
@@ -77,6 +83,7 @@ export default {
     .search_btn {
         width: 100px;
         height: 20px;
+        margin-right: 20px;
     }
 
 .v-table-row {

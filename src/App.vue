@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-table
-        :users_data="USERS" 
+        :currency_data="CURRENCIES" 
     />
   </div>
 </template>
@@ -17,16 +17,16 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'USERS'
+      'CURRENCIES'
     ])
   },
   methods: {
     ...mapActions([
-      'GET_USERS_FROM_API'
+      'GET_CURRENCIES_FROM_API'
     ])
   },
   mounted(){
-    this.GET_USERS_FROM_API()
+    this.GET_CURRENCIES_FROM_API()
   }
 }
 </script>

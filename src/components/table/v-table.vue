@@ -24,7 +24,7 @@
     </div>
     <div class="v-table__body"></div>
     <v-table-row 
-      v-for="row in paginatedUsers"
+      v-for="row in paginatedCurrency"
       :key="row.name"
       :row_data="row"
     />
@@ -52,18 +52,18 @@ export default {
     vTableSearch
   },
   props: {
-    users_data: {
+    currency_data: {
       type: Array,
       default: () => {
         return []
       }
     }
   },
-
   data() {
     return {
-      usersPerPage: 40,
+      currencyPerPage: 40,
       pageNumber: 1,
+      list: [],
       selected1: true,
       selected2: true,
       selected3: true,
@@ -72,17 +72,20 @@ export default {
       selected6: true,
     }
   },
+  // ready: function() {
+  //   this.currency_data = this.$data.currency
+  // },
   computed: {
     ...mapGetters([
           'SEARCH_VALUE'
       ]),
     pages() {
-      return Math.ceil(this.users_data.length/40)
+      return Math.ceil(this.list.length/40)
     },
-    paginatedUsers() {
-      let from = (this.pageNumber -1)*this.usersPerPage;
-      let to = from + this.usersPerPage;
-      return this.users_data.slice(from, to);
+    paginatedCurrency() {
+      let from = (this.pageNumber -1)*this.currencyPerPage;
+      let to = from + this.currencyPerPage;
+      return this.list.slice(from, to);
     }
   },
 
@@ -91,27 +94,26 @@ export default {
       this.pageNumber = page;
     },
     sortByName() {
-      this.users_data.sort((a,b) => a.name.localeCompare(b.name))
+      this.list.sort((a,b) => a.name.localeCompare(b.name))
     },
     sortByCode() {
-      this.users_data.sort((a,b) => a.code.localeCompare(b.code))
+      this.list.sort((a,b) => a.code.localeCompare(b.code))
     },
     sortByDeposit() {
-      this.users_data.sort((a,b) => a.deposit_enabled - b.deposit_enabled)
+      this.list.sort((a,b) => a.deposit_enabled - b.deposit_enabled)
     },
     sortByTrading() {
-      this.users_data.sort((a,b) => a.trading_enabled - b.trading_enabled)
+      this.list.sort((a,b) => a.trading_enabled - b.trading_enabled)
     },
     sortByWithdrawal() {
-      this.users_data.sort((a,b) => a.withdrawal_enabled - b.withdrawal_enabled)
+      this.list.sort((a,b) => a.withdrawal_enabled - b.withdrawal_enabled)
     },
     sortProductsBySearchValue(searchValue){
+      let currencyList = [...this.currency_data];
       if (searchValue) {
-        this.users_data = this.users_data.filter(function(item){
-        return item.code.toLowerCase().includes(searchValue.toLowerCase())
-      }) 
+      this.list = currencyList.filter( (item) => item.code.toLowerCase().includes( searchValue.toLowerCase() ) );
       } else {
-        return this.users_data;
+         this.list = currencyList;
       }
     },
   },
